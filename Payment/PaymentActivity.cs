@@ -13,16 +13,16 @@ namespace Payment
     {
         public async Task<CompensationResult> Compensate(CompensateContext<PaymentLog> context)
         {
-             Console.WriteLine( $"Reverting {context.Log.OrderId}"  );
+             Console.WriteLine( $"Reverting payment for order {context.Log.OrderId}"  );
             return await Task.FromResult(context.Compensated());
         }
 
         public async Task<ExecutionResult> Execute(ExecuteContext<domain.Payment> context)
         {
             Console.WriteLine(context.Arguments.OrderId);
-    
+            Console.WriteLine($"Payment processed for {context.Arguments.OrderId}");
             // return await Task.FromResult( context.FaultedWithVariables(new Exception(""),new PaymentLog { OrderId="OD123"}));
-            return context.Completed(new domain.PaymentLog { OrderId = context.Arguments.OrderId, Status = "Created", Description = "Order has been created" });
+            return context.Completed(new domain.PaymentLog { OrderId = context.Arguments.OrderId, PaymentId = "PAY100", Status = "Created", Description = "Order has been created" });
         }
     }
 }

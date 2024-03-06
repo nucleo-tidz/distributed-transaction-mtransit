@@ -5,10 +5,7 @@
         public string OrderId { get; set; }
         public string InvoiceId { get; set; }
     }
-    public class InvoiceLog
+    public class InvoiceLog : ActivityLog
     {
-        public string OrderId { get; set; }
-        public string Status { get; set; }
-        public string Description { get; set; }
     }
 }

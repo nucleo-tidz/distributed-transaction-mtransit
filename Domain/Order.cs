@@ -5,10 +5,7 @@
         public string OrderId { get; set; }
         public IEnumerable<string> Items { get; set; }
     }
-    public class OrderLog
+    public class OrderLog : ActivityLog
     {
-        public string OrderId { get; set; }
-        public string Status { get; set; }
-        public string Description { get; set; }
     }
 }
