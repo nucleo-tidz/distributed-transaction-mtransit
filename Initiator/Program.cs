@@ -14,6 +14,10 @@ IHost host = Host.CreateDefaultBuilder(args)
                     h.Username("guest");
                     h.Password("guest");
                 });
+                cfg.ReceiveEndpoint("order-events", e =>
+                {
+                    e.Consumer<OrderTransactionTraceConsumer>();
+                });
             });
         });
         services.AddHostedService<Worker>();

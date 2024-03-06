@@ -1,8 +1,11 @@
+using Domain;
 using MassTransit;
 using MassTransit.Courier.Contracts;
+using MassTransit.Courier.Messages;
 using domain = Domain;
 namespace Initiator
 {
+   
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
@@ -16,15 +19,21 @@ namespace Initiator
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-         
-            var builder = new RoutingSlipBuilder(NewId.NextGuid());
+            Guid trackingNumber = NewId.NextGuid();
+            var builder = new RoutingSlipBuilder(trackingNumber);
             builder.AddActivity("CreateOrderActivity", new Uri("rabbitmq://localhost/create-order"), new domain.Order { OrderId = "OD123", Items = new List<string> { "Toy" } });
             builder.AddActivity("PaymentActivity", new Uri("rabbitmq://localhost/create-payment"), new domain.Payment { OrderId = "OD123", Amount = 10 });
-            builder.AddActivity("InvoiceActivity", new Uri("rabbitmq://localhost/create-invoice"), new domain.Invoice { OrderId = "OD123"});
+            builder.AddActivity("InvoiceActivity", new Uri("rabbitmq://localhost/create-invoice"), new domain.Invoice { OrderId = "OD123" });
+            await builder.AddSubscription(new Uri("rabbitmq://localhost/order-events"),
+                                           RoutingSlipEvents.Faulted,
+                                           x => x.Send<OrderTransactionTrace>(new
+                                           {
+                                               OrderId = "OD123",
+                                           
+                                           }));
             RoutingSlip routingSlip = builder.Build();
-      
             await _bus.Execute(routingSlip);
-      
+
         }
-    }
+    } 
 }

@@ -14,10 +14,10 @@ namespace Invoice
 
         public async Task<ExecutionResult> Execute(ExecuteContext<domain.Invoice> context)
         {
-           Console.WriteLine($"Invoice creation Failed {context.Arguments.OrderId}");
+           Console.WriteLine($"Invoice creation completed {context.Arguments.OrderId}");
             await Task.CompletedTask;
-            return await Task.FromResult(context.FaultedWithVariables(new Exception(""), new InvoiceLog { OrderId = "OD123" }));
-           // return await Task.FromResult(context.Completed<OrderLog>(new InvoiceLog { OrderId = context.Arguments.OrderId, Status = "Created", Description = "Order has been created" }));
+           // return await Task.FromResult(context.FaultedWithVariables(new Exception(""), new InvoiceLog { OrderId = "OD123" }));
+            return await Task.FromResult(context.Completed<InvoiceLog>(new InvoiceLog { OrderId = context.Arguments.OrderId, Status = "Created", Description = "Order has been created" }));
         }
     }
 }
