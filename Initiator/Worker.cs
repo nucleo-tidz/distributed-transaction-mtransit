@@ -21,10 +21,10 @@ namespace Initiator
         {
             Guid trackingNumber = NewId.NextGuid();
             var builder = new RoutingSlipBuilder(trackingNumber);
-            builder.AddActivity("CreateOrderActivity", new Uri("rabbitmq://localhost/create-order"), new domain.Order { OrderId = "OD123", Items = new List<string> { "Toy" } });
-            builder.AddActivity("PaymentActivity", new Uri("rabbitmq://localhost/create-payment"), new domain.Payment { OrderId = "OD123", Amount = 10 });
-            builder.AddActivity("InvoiceActivity", new Uri("rabbitmq://localhost/create-invoice"), new domain.Invoice { OrderId = "OD123" });
-            await builder.AddSubscription(new Uri("rabbitmq://localhost/order-events"),
+            builder.AddActivity("CreateOrderActivity", new Uri("rabbitmq://nucleohost/create-order"), new domain.Order { OrderId = "OD123", Items = new List<string> { "Toy" } });
+            builder.AddActivity("PaymentActivity", new Uri("rabbitmq://nucleohost/create-payment"), new domain.Payment { OrderId = "OD123", Amount = 10 });
+            builder.AddActivity("InvoiceActivity", new Uri("rabbitmq://nucleohost/create-invoice"), new domain.Invoice { OrderId = "OD123" });
+            await builder.AddSubscription(new Uri("rabbitmq://nucleohost/order-events"),
                                            RoutingSlipEvents.Faulted,
                                            x => x.Send<OrderTransactionTrace>(new
                                            {

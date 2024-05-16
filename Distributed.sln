@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Initiator", "Initiator\Init
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{1749A0B9-1F1F-48FB-8A08-7D090BA42283}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoice", "Invoice\Invoice.csproj", "{4800D68D-063B-4048-B3B1-3997F1076B89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoice", "Invoice\Invoice.csproj", "{4800D68D-063B-4048-B3B1-3997F1076B89}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8FC04B4E-0BA2-4DDB-932A-458946468446}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4800D68D-063B-4048-B3B1-3997F1076B89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4800D68D-063B-4048-B3B1-3997F1076B89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4800D68D-063B-4048-B3B1-3997F1076B89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FC04B4E-0BA2-4DDB-932A-458946468446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FC04B4E-0BA2-4DDB-932A-458946468446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FC04B4E-0BA2-4DDB-932A-458946468446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FC04B4E-0BA2-4DDB-932A-458946468446}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

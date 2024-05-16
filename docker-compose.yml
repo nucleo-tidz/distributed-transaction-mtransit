@@ -1,0 +1,59 @@
+version: '3.4'
+networks:
+  nucleotidz:
+    driver: bridge
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: 'rabbitmq'
+    hostname: "nucleohost"
+    ports:
+        - 5672:5672
+        - 15672:15672
+    networks:
+      - nucleotidz
+    restart: unless-stopped
+
+  order:
+    image: ${DOCKER_REGISTRY-}order
+    depends_on:
+       - rabbitmq
+       - initiator
+    build:
+      context: .
+      dockerfile: Order/Dockerfile
+    networks:
+      - nucleotidz
+  payment:
+    image: ${DOCKER_REGISTRY-}payment
+    depends_on:
+       - rabbitmq
+       - initiator
+    build:
+      context: .
+      dockerfile: Payment/Dockerfile
+    networks:
+      - nucleotidz
+  invoice:
+    image: ${DOCKER_REGISTRY-}invoice
+    depends_on:
+       - rabbitmq
+       - initiator
+    build:
+      context: .
+      dockerfile: Invoice/Dockerfile
+    networks:
+      - nucleotidz
+  initiator:
+    image: ${DOCKER_REGISTRY-}initiator
+    depends_on:
+       - rabbitmq
+    build:
+      context: .
+      dockerfile: Initiator/Dockerfile
+    networks:
+      - nucleotidz
+
+
+
+    # https://github.com/matthew-harper/rabbit-docker-sample/blob/master/docker-compose.yml
