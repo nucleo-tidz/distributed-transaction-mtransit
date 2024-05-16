@@ -11,14 +11,14 @@ IHost host = Host.CreateDefaultBuilder(args)
         
             x.UsingRabbitMq((context, cfg) =>
             {
-                cfg.Host("localhost", "/", h =>
+                cfg.Host("nucleohost", "/", h =>
                 {
                     h.Username("guest");
                     h.Password("guest");
                 });
                 cfg.ReceiveEndpoint("create-payment", e =>
                 {
-                    e.ExecuteActivityHost<PaymentActivity, Domain.Payment>(new Uri("rabbitmq://localhost/create-payment-compensate"));
+                    e.ExecuteActivityHost<PaymentActivity, Domain.Payment>(new Uri("rabbitmq://nucleohost/create-payment-compensate"));
                 });
                 cfg.ReceiveEndpoint("create-payment-compensate", e =>
                 {

@@ -12,14 +12,14 @@ IHost host = Host.CreateDefaultBuilder(args)
             x.AddActivitiesFromNamespaceContaining<CreateOrderActivity>();
             x.UsingRabbitMq((context, cfg) =>
             {
-                cfg.Host("localhost", "/", h =>
+                cfg.Host("nucleohost", "/", h =>
                 {
                     h.Username("guest");
                     h.Password("guest");
                 });
                 cfg.ReceiveEndpoint("create-order", e =>
                 {
-                    e.ExecuteActivityHost<CreateOrderActivity,Domain.Order>(new Uri("rabbitmq://localhost/create-order-compensate"));
+                    e.ExecuteActivityHost<CreateOrderActivity,Domain.Order>(new Uri("rabbitmq://nucleohost/create-order-compensate"));
                    
                 });
                 cfg.ReceiveEndpoint("create-order-compensate", e =>

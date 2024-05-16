@@ -11,14 +11,14 @@ IHost host = Host.CreateDefaultBuilder(args)
             x.AddActivitiesFromNamespaceContaining<CreateInvoiceActivity>();
             x.UsingRabbitMq((context, cfg) =>
             {
-                cfg.Host("localhost", "/", h =>
+                cfg.Host("nucleohost", "/", h =>
                 {
                     h.Username("guest");
                     h.Password("guest");
                 });
                 cfg.ReceiveEndpoint("create-invoice", e =>
                 {
-                    e.ExecuteActivityHost<CreateInvoiceActivity, Domain.Invoice>(new Uri("rabbitmq://localhost/create-invoice-compensate"));
+                    e.ExecuteActivityHost<CreateInvoiceActivity, Domain.Invoice>(new Uri("rabbitmq://nucleohost/create-invoice-compensate"));
 
                 });
                 cfg.ReceiveEndpoint("create-invoice-compensate", e =>
