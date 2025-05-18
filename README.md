@@ -1,7 +1,7 @@
 A sample project that showcases the use of [MassTransit ](https://masstransit.io/)Courier for creating and executing distributed transactions with fault compensation, following the Routing Slip pattern. This project exemplifies how MassTransit Courier can effectively manage the flow of tasks and ensure fault tolerance in distributed transactions by adhering to the Routing Slip pattern
 
 
-The project has been designed with a typical online shopping flow in mind, incorporating the following microservices:
+The project has been designed with a typical online shopping flow in mind, incorporating the following microservices
 
 1. **Order Service**: Responsible for creating orders. 
 2. **Payment Service**: Manages payment transactions. 
